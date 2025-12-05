@@ -23,7 +23,7 @@ public class VeiculoController {
         this.service = service;
     }
 
-    @PostMapping
+   @PostMapping
     public ResponseEntity<?> cadastrar(@RequestBody Veiculo v) {
         try {
             // Validação básica
@@ -32,6 +32,11 @@ public class VeiculoController {
             }
             if (v.getAno() < 1900 || v.getAno() > 2100) {
                 return ResponseEntity.badRequest().body("Ano inválido");
+            }
+            
+            // Adição da Validação de Preço (Novo)
+            if (v.getPreco() == null || v.getPreco().signum() <= 0) {
+                return ResponseEntity.badRequest().body("Preço deve ser maior que zero");
             }
             
             Veiculo salvo = service.cadastrar(v);

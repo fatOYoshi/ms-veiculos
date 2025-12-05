@@ -18,11 +18,16 @@ public class VeiculoServiceImpl implements VeiculoService {
 
     @Override
     public Veiculo cadastrar(Veiculo v) {
-        // Validação simples
+        // Validação da Placa (existente)
         if (v.getPlaca() == null || v.getPlaca().trim().isEmpty()) {
             throw new RuntimeException("Placa é obrigatória");
         }
         
+        // Validação de Preço (Novo)
+        if (v.getPreco() == null || v.getPreco().signum() <= 0) {
+            throw new RuntimeException("Preço deve ser maior que zero");
+        }
+
         // Se status não for enviado, define como "disponivel"
         if (v.getStatus() == null || v.getStatus().trim().isEmpty()) {
             v.setStatus("disponivel");
@@ -31,7 +36,7 @@ public class VeiculoServiceImpl implements VeiculoService {
         return repository.save(v);
     }
 
-    @Override
+   @Override
     @Transactional
     public Veiculo atualizar(Long id, Veiculo v) {
         // Busca o veículo existente
@@ -53,6 +58,15 @@ public class VeiculoServiceImpl implements VeiculoService {
         }
         if (v.getStatus() != null) {
             existente.setStatus(v.getStatus());
+        }
+        
+        // Lógica para atualizar o Preço (Novo)
+        if (v.getPreco() != null) { 
+             // Validação básica para o preço na atualização
+             if (v.getPreco().signum() <= 0) {
+                throw new RuntimeException("Preço na atualização deve ser maior que zero");
+             }
+            existente.setPreco(v.getPreco());
         }
         
         return repository.save(existente);
