@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Gerenciamento de Veículos</title>
+    <link rel="stylesheet" href="css/styles.css" />
+  </head>
+  <body>
+    <header>
+      <h1>Gerenciamento de Frota</h1>
+    </header>
+
+    <main>
+      <section id="cadastro-form">
+        <h2>Cadastrar Novo Veículo</h2>
+        <form id="veiculo-form">
+          <input
+            type="text"
+            id="placa"
+            placeholder="Placa (Ex: ABC1234)"
+            required
+          />
+          <input type="text" id="marca" placeholder="Marca" required />
+          <input type="text" id="modelo" placeholder="Modelo" required />
+          <input
+            type="number"
+            id="ano"
+            placeholder="Ano (Ex: 2025)"
+            required
+            min="1900"
+            max="2100"
+          />
+
+          <select id="status" required>
+            <option value="" disabled selected>Selecione o Status ▼</option>
+            <option value="disponivel">Disponível</option>
+            <option value="alugado">Alugado</option>
+            <option value="manutencao">Manutenção</option>
+          </select>
+
+          <button type="submit">Cadastrar Veículo</button>
+        </form>
+      </section>
+
+      <section id="lista-veiculos">
+        <h2>Veículos Cadastrados</h2>
+        <table>
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Placa</th>
+              <th>Marca</th>
+              <th>Modelo</th>
+              <th>Ano</th>
+              <th>Status</th>
+              <th>Ações</th>
+            </tr>
+          </thead>
+          <tbody id="veiculos-tbody">
+            <!-- Dados serão inseridos aqui pelo JavaScript -->
+          </tbody>
+        </table>
+      </section>
+    </main>
+
+    <script src="js/main.js"></script>
+  </body>
+</html>

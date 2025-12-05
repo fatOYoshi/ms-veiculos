@@ -9,4 +9,5 @@ public interface VeiculoService {
     Veiculo atualizar(Long id, Veiculo v);
     List<Veiculo> listar();
     Veiculo consultar(Long id);
+    void excluir(Long id); // ✅ ADICIONAR ESTE MÉTODO
 }
